@@ -116,8 +116,8 @@
     <div class="operators">
         <div class="operator-button" onclick="addToExpression('+')">+</div>
         <div class="operator-button" onclick="addToExpression('-')">-</div>
-        <div class="operator-button" onclick="addToExpression('*')">×</div>
-        <div class="operator-button" onclick="addToExpression('/')">÷</div>
+        <div class="operator-button" onclick="addToExpression('×')">×</div>
+        <div class="operator-button" onclick="addToExpression('÷')">÷</div>
     </div>
     <div class="brackets">
         <div class="bracket-button" onclick="addToExpression('(')">(</div>
@@ -198,8 +198,11 @@
                     return;
                 }
 
+                // 转换符号为JavaScript可识别的运算符
+                const evalExpression = expression.replace(/×/g, '*').replace(/÷/g, '/');
+
                 // 计算结果
-                const result = eval(expression);
+                const result = eval(evalExpression);
                 if (Math.abs(result - 24) < 0.0001) {
                     document.getElementById('result').textContent = "🎉 恭喜你，答对了！";
                     setTimeout(newGame, 1500); // 1.5秒后自动换题
